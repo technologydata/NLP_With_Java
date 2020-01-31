@@ -1,0 +1,6 @@
+/.idea/
+/Java_NLP.iml
+out\
+production\
+/out/production/Java_NLP/META-INF/Java_NLP.kotlin_module
+/out/production/Java_NLP/com/examples/StemmingExample.class
