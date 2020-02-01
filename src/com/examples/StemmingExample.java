@@ -1,6 +1,7 @@
 package com.examples;
 
 import opennlp.tools.stemmer.PorterStemmer;
+import opennlp.tools.stemmer.snowball.SnowballStemmer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +16,8 @@ public class StemmingExample {
     /**
      * Method to implement Porter Stemming on a list of words
      *
-     * @param allWords Words to stem
-     * @return list of words after stemming
+     * @param allWords Words to Stem
+     * @return list of words after stemming using Porter Stemming Algorithm
      */
     private List<String> porterStemming(List<String> allWords) {
 
@@ -27,6 +28,24 @@ public class StemmingExample {
                 .map(porterStemmer::stem)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * This method use the SnowBall Algorithm to perform stemming
+     *
+     * @param allWords Words to Stem
+     * @return list of words after stemming using Snowball Algorithm
+     */
+    private List<String> snowBallStemming(List<String> allWords) {
+
+        //Pass the Algorithm Instance for the appropriate Language.
+        SnowballStemmer snowballStemmer = new SnowballStemmer(SnowballStemmer.ALGORITHM.ENGLISH);
+
+        //Process each word and stem it
+        return allWords.stream()
+                .map(word -> snowballStemmer.stem(word).toString())
+                .collect(Collectors.toList());
+    }
+
 
     /**
      * This method prints the result after stemming
@@ -51,11 +70,19 @@ public class StemmingExample {
         //Convert the text into list of words based on space
         List<String> allWords = Arrays.asList(text.split("\\s+"));
 
+        System.out.println("---------------Porter Stemming---------------");
         //Call the porter stemming method to stem the words
-        List<String> result = stemmingExample.porterStemming(allWords);
+        List<String> stemmingWithPorter = stemmingExample.porterStemming(allWords);
+        //Print the result for porter stemming
+        stemmingExample.showResult(allWords, stemmingWithPorter);
 
-        //Print the result
-        stemmingExample.showResult(allWords, result);
+        System.out.println("---------------Snowball Stemming---------------");
+        //Call the snowball stemming method to stem the words
+        List<String> stemmingWithSnowball = stemmingExample.snowBallStemming(allWords);
+        //Print the result for snowball stemming
+        stemmingExample.showResult(allWords, stemmingWithSnowball);
+
+        //stemmingExample.snowBallStemming(allWords);
 
     }
 
