@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
+/**
+ * This class is an example of how to do sentence detection.
+ */
 public class SentenceDetectionExample {
     public static void main(String[] args) {
 
